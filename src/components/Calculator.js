@@ -1,6 +1,8 @@
 /* eslint-disable default-case */
 import { Box, Grid, Button, Typography } from '@mui/material';
 import React, { useReducer } from 'react';
+import DigitButton from './DigitButton';
+import OperationButton from './OperationButton';
 
 const initialState = {
     prevNumber: "",
@@ -121,6 +123,7 @@ function formatOperand(operand) {
 const Calculator = () => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
+    
     return (
         <Box sx={{
             backgroundColor: '#222',
@@ -134,6 +137,7 @@ const Calculator = () => {
                 borderRadius: '5px',
                 overflow: 'hidden',
             }}>
+
                 {/* Calculator display */}
                 <Box sx={{
                     backgroundColor: '#4D5BDE',
@@ -153,85 +157,75 @@ const Calculator = () => {
                         {formatOperand(state.currentNumber)}
                     </Typography>
                 </Box>
+
                 {/* Calculator button pad */}
                 <Box sx={{
                     height: "600px",
                     backgroundColor: '#FC3C79',
                     padding: '10px 5px 5px 5px',
-                    "& .button": {
-                        width: "100%",
-                        height: "100%",
-                        backgroundColor: "white",
-                        fontSize: "30px",
-                        fontWeight: "bold",
-                        "&:hover": {
-                            color: "white",
-                            backgroundColor: "transparent",
-                        }
-                    }
                 }}>
                     <Grid container spacing={0.5} height="100%">
-                        {/* Firts row */}
+                        {/* First row */}
                         <Grid item xs={3}>
-                            <Button className="button" onClick={() => dispatch({ type: "ALL_CLEAR" })}>AC</Button>
+                            <OperationButton type="ALL_CLEAR" operator="AC" dispatch={dispatch} />
                         </Grid>
                         <Grid item xs={3}>
-                            <Button className="button" onClick={() => dispatch({ type: "DELETE" })}>D</Button>
+                            <OperationButton type="DELETE" operator="D" dispatch={dispatch} />
                         </Grid>
                         <Grid item xs={3}>
-                            <Button className="button" onClick={(event) => dispatch({ type: "ADD_OPERATOR", payload: event.target.innerText })}>%</Button>
+                            <OperationButton type="ADD_OPERATOR" operator="%" dispatch={dispatch} />
                         </Grid>
                         <Grid item xs={3}>
-                            <Button className="button" onClick={(event) => dispatch({ type: "ADD_OPERATOR", payload: event.target.innerText })}>/</Button>
+                            <OperationButton type="ADD_OPERATOR" operator="/" dispatch={dispatch} />
                         </Grid>
                         {/* Second row */}
                         <Grid item xs={3}>
-                            <Button className="button digit" onClick={(event) => dispatch({ type: "ADD_DIGIT", payload: event.target.innerText })}>7</Button>
+                            <DigitButton digit={"7"} dispatch={dispatch} />
                         </Grid>
                         <Grid item xs={3}>
-                            <Button className="button digit" onClick={(event) => dispatch({ type: "ADD_DIGIT", payload: event.target.innerText })}>8</Button>
+                            <DigitButton digit={"8"} dispatch={dispatch} />
                         </Grid>
                         <Grid item xs={3}>
-                            <Button className="button digit" onClick={(event) => dispatch({ type: "ADD_DIGIT", payload: event.target.innerText })}>9</Button>
+                            <DigitButton digit={"9"} dispatch={dispatch} />
                         </Grid>
                         <Grid item xs={3}>
-                            <Button className="button" onClick={(event) => dispatch({ type: "ADD_OPERATOR", payload: event.target.innerText })}>*</Button>
+                            <OperationButton type="ADD_OPERATOR" operator="*" dispatch={dispatch} />
                         </Grid>
                         {/* Third row */}
                         <Grid item xs={3}>
-                            <Button className="button digit" onClick={(event) => dispatch({ type: "ADD_DIGIT", payload: event.target.innerText })}>4</Button>
+                            <DigitButton digit={"4"} dispatch={dispatch} />
                         </Grid>
                         <Grid item xs={3}>
-                            <Button className="button digit" onClick={(event) => dispatch({ type: "ADD_DIGIT", payload: event.target.innerText })}>5</Button>
+                            <DigitButton digit={"5"} dispatch={dispatch} />
                         </Grid>
                         <Grid item xs={3}>
-                            <Button className="button digit" onClick={(event) => dispatch({ type: "ADD_DIGIT", payload: event.target.innerText })}>6</Button>
+                            <DigitButton digit={"6"} dispatch={dispatch} />
                         </Grid>
                         <Grid item xs={3}>
-                            <Button className="button" onClick={(event) => dispatch({ type: "ADD_OPERATOR", payload: event.target.innerText })}>-</Button>
+                            <OperationButton type="ADD_OPERATOR" operator="-" dispatch={dispatch} />
                         </Grid>
                         {/* Fourth row*/}
                         <Grid item xs={3}>
-                            <Button className="button digit" onClick={(event) => dispatch({ type: "ADD_DIGIT", payload: event.target.innerText })}>1</Button>
+                            <DigitButton digit={"1"} dispatch={dispatch} />
                         </Grid>
                         <Grid item xs={3}>
-                            <Button className="button digit" onClick={(event) => dispatch({ type: "ADD_DIGIT", payload: event.target.innerText })}>2</Button>
+                            <DigitButton digit={"2"} dispatch={dispatch} />
                         </Grid>
                         <Grid item xs={3}>
-                            <Button className="button digit" onClick={(event) => dispatch({ type: "ADD_DIGIT", payload: event.target.innerText })}>3</Button>
+                            <DigitButton digit={"3"} dispatch={dispatch} />
                         </Grid>
                         <Grid item xs={3}>
-                            <Button className="button" onClick={(event) => dispatch({ type: "ADD_OPERATOR", payload: event.target.innerText })}>+</Button>
+                            <OperationButton type="ADD_OPERATOR" operator="+" dispatch={dispatch} />
                         </Grid>
                         {/* Fifth row */}
                         <Grid item xs={6}>
-                            <Button className="button digit" onClick={(event) => dispatch({ type: "ADD_DIGIT", payload: event.target.innerText })}>0</Button>
+                            <DigitButton digit={"0"} dispatch={dispatch} />
                         </Grid>
                         <Grid item xs={3}>
-                            <Button className="button dot" onClick={(event) => dispatch({ type: "ADD_DIGIT", payload: event.target.innerText })}>.</Button>
+                            <DigitButton digit={"."} dispatch={dispatch} />
                         </Grid>
                         <Grid item xs={3}>
-                            <Button className="button" onClick={() => dispatch({ type: "EVALUATE" })} >=</Button>
+                            <OperationButton type="EVALUATE" operator="=" dispatch={dispatch} />
                         </Grid>
                     </Grid>
                 </Box>
